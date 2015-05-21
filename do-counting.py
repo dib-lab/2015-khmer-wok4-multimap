@@ -20,7 +20,7 @@ def main():
     names = load(fp)
     fp.close()
 
-    print 'loaded %d references' % (len(names),)
+    print >>sys.stderr, 'loaded %d references' % (len(names),)
     aligner = khmer.ReadAligner(cg, 1, 1.0)
 
     counts = {}

@@ -27,9 +27,11 @@ rna.graph: rna.fa
 rna: rna.graph
 	./do-align.py rna rna-reads.fq
 
-xxx:
-	python ./do-counting.py rna ../2015-wok1/rseq-mapped.fq.gz  
+rseq.labelcount: rna.graph
+	python ./do-counting.py rna rseq-mapped.fq.gz > rseq.labelcount
 
 bacteria.graph: bacteria.fa.gz
 	./make-index.py -k 21 -x 1e7 -N 4 bacteria.fa.gz bacteria
 
+ecoli: bacteria.graph
+	./do-align.py bacteria ecoli-p12b-reads.fa
