@@ -1,6 +1,6 @@
 NULLGRAPH=../nullgraph
 
-all: genomes.fa reads-a.fa reads-b.fa
+all: genomes.fa reads-a.fa reads-b.fa rna.fa
 
 clean:
 	-rm -f *.fa
@@ -19,3 +19,7 @@ reads-a.fa: genomes.fa
 
 reads-b.fa: genomes.fa
 	$(NULLGRAPH)/make-reads.py -r 100 -C 10 -S 1 genome-b.fa | head -6 > reads-b.fa
+
+rna_exon.graph: rna.fa
+	make-index.py -k 21 -x 8e7 -N 4 rna.fa rna_exon
+

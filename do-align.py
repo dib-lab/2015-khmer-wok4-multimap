@@ -11,6 +11,7 @@ def main():
     parser.add_argument('reads')
     args = parser.parse_args()
 
+    print >>sys.stderr, "Loading graph & labels"
     cg = khmer.load_counting_hash(args.index + '.graph')
     lh = khmer._LabelHash(cg)
     lh.load_labels_and_tags(args.index + '.labels')
@@ -18,11 +19,10 @@ def main():
     names = load(fp)
     fp.close()
 
-    print 'loaded two references:', names
-
+    print 'loaded %d references' % (len(names),)
     aligner = khmer.ReadAligner(cg, 1, 1.0)
 
-    # run through all the reads, align, and use alignments to look up
+    # run through all the queries, align, and use alignments to look up
     # the label.
     for record in screed.open(args.reads):
         # build alignments against cg

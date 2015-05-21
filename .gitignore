@@ -1,2 +1,5 @@
 *.fa
 *~
+*.labels
+*.graph
+*.list
