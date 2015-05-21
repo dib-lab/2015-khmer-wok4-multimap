@@ -1,13 +1,14 @@
 NULLGRAPH=../nullgraph
 
-all: genomes.fa reads-a.fa reads-b.fa rna.fa
+all: fake rna.fa
 
 clean:
-	-rm -f *.fa
+	-rm -f genome-?.fa reads-?.fa *.graph *.labels *.list
 
-do: reads-a.fa reads-b.fa
-	multi-align.py genomes.fa reads-a.fa
-	multi-align.py genomes.fa reads-b.fa
+fake: reads-a.fa reads-b.fa
+	./make-index.py genomes.fa genomes
+	./do-align.py genomes reads-a.fa
+	./do-align.py genomes reads-b.fa
 
 genomes.fa:
 	$(NULLGRAPH)/make-random-genome.py -l 1000 -s 1 --name='genomeA' > genome-a.fa
@@ -20,6 +21,8 @@ reads-a.fa: genomes.fa
 reads-b.fa: genomes.fa
 	$(NULLGRAPH)/make-reads.py -r 100 -C 10 -S 1 genome-b.fa | head -6 > reads-b.fa
 
-rna_exon.graph: rna.fa
-	make-index.py -k 21 -x 8e7 -N 4 rna.fa rna_exon
+rna.graph: rna.fa
+	./make-index.py -k 21 -x 8e7 -N 4 rna.fa rna
 
+rna: rna.graph
+	./do-align.py rna rna-reads.fq

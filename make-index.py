@@ -18,13 +18,14 @@ def main():
     # build a label hash + readaligner.
     if args.nodegraph:
         lh = khmer.LabelHash(args.ksize, args.tablesize, args.n_tables)
+        assert 0, "doesn't work yet :("
     else:
         lh = khmer.CountingLabelHash(args.ksize, args.tablesize, args.n_tables)
 
     lh.consume_fasta_and_tag_with_labels(args.genomes)
 
-    names = []
     # (labels in 'lh' are in the order of the sequences in the file)
+    names = []
     for grec in screed.open(args.genomes):
         names.append(grec.name)
 
