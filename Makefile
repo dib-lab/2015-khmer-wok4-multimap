@@ -26,3 +26,6 @@ rna.graph: rna.fa
 
 rna: rna.graph
 	./do-align.py rna rna-reads.fq
+
+xxx:
+	python ./do-counting.py rna ../2015-wok1/rseq-mapped.fq.gz  
