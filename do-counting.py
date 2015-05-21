@@ -34,7 +34,11 @@ def main():
             print >>sys.stderr, '...', n
 
         # build alignments against cg
-        _, ga, ra, truncated = aligner.align(record.sequence)
+        seq = record.sequence.replace('N', 'A')
+        _, ga, ra, truncated = aligner.align(seq)
+
+        if len(ga) < 0.8 * len(seq):
+            continue
 
         # now grab the tags associated with the alignment
         ga = ga.replace('-', '')

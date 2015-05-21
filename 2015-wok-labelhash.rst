@@ -198,15 +198,59 @@ and you should see something like this (output elided)::
 showing that we can correctly assign reads sampled from randomly constructed
 genomes - a good test case :).
 
+Assigning reads to reference genomes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We can also index a bunch of bacterial genomes and map against all of
+them simultaneously -- target 'ecoli' will map reads from E. coli P12B
+against all Escherichia genomes in NCBI.  (Spoiler alert: all of the
+E. coli strains are very closely related, so the reads map to many
+references!)
+
 Mapping reads to transcripts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 It turns out to be remarkably easy to implement a counting-via-mapping
-approach -- see `do-counting.py <https://github.com/dib-lab/2015-khmer-wok4-multimap/blob/master/do-counting.py>`__.
+approach -- see `do-counting.py
+<https://github.com/dib-lab/2015-khmer-wok4-multimap/blob/master/do-counting.py>`__.
+To run this on the same RNAseq data set as in the `counting blog post
+<http://ivory.idyll.org/blog/2015-wok-counting.html>`__, run build the
+'rseq.labelcount' target.
 
 @@compare to wok3 counting output.
 
-Assigning reads to reference genomes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Flaws in our current implementation
+-----------------------------------
 
-We can also index a bunch of NCBI bacterial genomes.
+A few points --
+
+* we haven't introduced any positional labeling in the above labels,
+  so all we can do is retrieve the entire sequence around submatches.
+  This is enough to do some things (like counting transcripts) but for
+  many purposes (like pileups / variant calling via mapping) we would
+  need to do something with higher resolution.
+
+* right now, if there's *any* match to a tag in the graph, all of the
+  labels on that tag get reported.  It's easy to instead change the
+  behavior so that only those labels that appear on *all* tags are
+  reported - this might be useful when (for example) mapping longer
+  fragments than reads.
+
+* there's no reason we couldn't come up with different tagging and labeling
+  schemes that focus on features of interests - specific variants, or
+  branch points for isoforms, or what have you.  Much of this is
+  straightforward and can be done via the Python layer, too.
+
+* "labeled De Bruijn graphs" are equivalent in concept to "colored De
+  Bruijn graphs", but we worry that "colored" is already a well-used
+  term in graph theory and we are hoping that we can drop "colored"
+  in favor of "labeled".
+
+Appendix: Running this code
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The computational results in this blog post are Rather Reproducible
+(TM).  Please see
+https://github.com/dib-lab/2015-khmer-wok4-labelhash/blob/master/README.rst
+for instructions on replicating the results on a virtual machine or
+using a Docker container.
