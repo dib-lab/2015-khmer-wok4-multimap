@@ -28,16 +28,15 @@ def main():
         # build alignments against cg
         _, ga, ra, truncated = aligner.align(record.sequence)
 
-        if truncated:
-            print 'NO MATCHES', record.name
-        else:
-            # now grab the associated labels
-            labels = lh.sweep_label_neighborhood(ga)
-            print labels
+        # now grab the tags associated with the alignment
+        ga = ga.replace('-', '')
+        labels = lh.sweep_label_neighborhood(ga)
 
-            # print out the matches.
-            matches = set([ names[i] for i in labels ])
-            print record.name, 'matches to', ", ".join(matches)
+        # retrieve the labels associated with the tags
+        matches = set([ names[i] for i in labels ])
+
+        # print out the matches.
+        print record.name, len(matches), ", ".join(matches)
 
 if __name__ == '__main__':
     main()
