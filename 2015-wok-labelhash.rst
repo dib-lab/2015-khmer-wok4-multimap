@@ -14,7 +14,7 @@ So far, in this week of khmer blog posts (`1
 focusing on the read-to-graph aligner ("graphalign"), which enables
 sequence alignments to a De Bruijn graph.  One persistent challenge
 with this functionality as introduced is that our De Bruijn graphs
-ndoes are *anonymous*, so we have no way of knowing the *sources*
+nodes are *anonymous*, so we have no way of knowing the *sources*
 of the graph sequences to which we're aligning.
 
 Without being able to label the graph with source sequences and
@@ -55,7 +55,7 @@ The background is that we were dealing with *extremely* large graphs
 graphs in order to determine if any given node was transitively
 connected to any other node; from this, we could determine which nodes
 belonged to which components. We didn't want to label all the nodes in
-teh graph, or traverse from all the nodes, because this was
+the graph, or traverse from all the nodes, because this was
 prohibitive computationally.
 
 A sparse graph covering
