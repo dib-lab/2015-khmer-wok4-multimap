@@ -1,9 +1,9 @@
 NULLGRAPH=../nullgraph
 
-all: fake rna.fa
+all: fake rna rseq.labelcount ecoli
 
 clean:
-	-rm -f genome-?.fa reads-?.fa *.graph *.labels *.list
+	-rm -f genome-?.fa reads-?.fa *.graph *.labels *.list 
 
 fake: reads-a.fa reads-b.fa
 	./make-index.py genomes.fa genomes
