@@ -1,25 +1,26 @@
 #! /usr/bin/env python
+import sys
 import khmer
 import screed
 import argparse
+from cPickle import load
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('genomes')
+    parser.add_argument('index')
     parser.add_argument('reads')
     args = parser.parse_args()
 
-    # build a counting label hash + readaligner.
-    lh = khmer.CountingLabelHash(21, 1e7, 4)
-    lh.consume_fasta_and_tag_with_labels(args.genomes)
-    aligner = khmer.ReadAligner(lh.graph, 1, 1.0)
-
-    names = []
-    # (labels in 'lh' are in the order of the sequences in the file)
-    for grec in screed.open(args.genomes):
-        names.append(grec.name)
+    cg = khmer.load_counting_hash(args.index + '.graph')
+    lh = khmer._LabelHash(cg)
+    lh.load_labels_and_tags(args.index + '.labels')
+    fp = open(args.index + '.list', 'rb')
+    names = load(fp)
+    fp.close()
 
     print 'loaded two references:', names
+
+    aligner = khmer.ReadAligner(cg, 1, 1.0)
 
     # run through all the reads, align, and use alignments to look up
     # the label.
@@ -32,6 +33,7 @@ def main():
         else:
             # now grab the associated labels
             labels = lh.sweep_label_neighborhood(ga)
+            print labels
 
             # print out the matches.
             matches = set([ names[i] for i in labels ])
