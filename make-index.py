@@ -22,11 +22,12 @@ def main():
     else:
         lh = khmer.CountingLabelHash(args.ksize, args.tablesize, args.n_tables)
 
-    lh.consume_fasta_and_tag_with_labels(args.genomes)
+    #lh.consume_fasta_and_tag_with_labels(args.genomes)
 
     # (labels in 'lh' are in the order of the sequences in the file)
     names = []
-    for grec in screed.open(args.genomes):
+    for n, grec in enumerate(screed.open(args.genomes)):
+        lh.consume_sequence_and_tag_with_labels(grec.sequence, n)
         names.append(grec.name)
 
     print 'loaded %d references' % (len(names),)
