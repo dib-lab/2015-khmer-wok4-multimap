@@ -29,3 +29,7 @@ rna: rna.graph
 
 xxx:
 	python ./do-counting.py rna ../2015-wok1/rseq-mapped.fq.gz  
+
+bacteria.graph: bacteria.fa.gz
+	./make-index.py -k 21 -x 1e7 -N 4 bacteria.fa.gz bacteria
+
