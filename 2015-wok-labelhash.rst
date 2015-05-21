@@ -218,7 +218,10 @@ To run this on the same RNAseq data set as in the `counting blog post
 <http://ivory.idyll.org/blog/2015-wok-counting.html>`__, run build the
 'rseq.labelcount' target.
 
-@@compare to wok3 counting output.
+.. figure:: https://raw.githubusercontent.com/dib-lab/2015-khmer-wok4-multimap/master/fig1.png
+   :width: 60%
+
+   Figure 2: Mapping counts via graphalign/labelhash (x axis) vs bowtie2 (y axis)
 
 Flaws in our current implementation
 -----------------------------------
@@ -230,12 +233,6 @@ A few points --
   This is enough to do some things (like counting transcripts) but for
   many purposes (like pileups / variant calling via mapping) we would
   need to do something with higher resolution.
-
-* right now, if there's *any* match to a tag in the graph, all of the
-  labels on that tag get reported.  It's easy to instead change the
-  behavior so that only those labels that appear on *all* tags are
-  reported - this might be useful when (for example) mapping longer
-  fragments than reads.
 
 * there's no reason we couldn't come up with different tagging and labeling
   schemes that focus on features of interests - specific variants, or
