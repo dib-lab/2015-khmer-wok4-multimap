@@ -10,7 +10,7 @@ Labeling a sparse covering of a De Bruijn graph, and utility thereof
 So far, in this week of khmer blog posts (`1
 <http://ivory.idyll.org/blog/2015-wok-error-correction.html>`__, `2
 <http://ivory.idyll.org/blog/2015-wok-variant-calling.html>`__, `3
-<http://ivory.idyll.org/blog/2015-wok-counting.html>`__, we've been
+<http://ivory.idyll.org/blog/2015-wok-counting.html>`__), we've been
 focusing on the read-to-graph aligner ("graphalign"), which enables
 sequence alignments to a De Bruijn graph.  One persistent challenge
 with this functionality as introduced is that our De Bruijn graphs
