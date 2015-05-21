@@ -139,11 +139,12 @@ If this seems like an overly complicated way of doing a BLAST, here
 are some things to consider:
 
 * when looking at sequence collections that share lots of sequence
-  this is an example of "compressive computing"@@, in which the query
-  is against a *compressed* representation of the database.  In
-  particular, this type of solution might be good when we have many,
-  many closely related genomes and we want to figure out which of them
-  have a specific variant.
+  this is an example of `"compressive computing"
+  <http://bioinformatics.oxfordjournals.org/content/29/13/i283.full>`__,
+  in which the query is against a *compressed* representation of the
+  database.  In particular, this type of solution might be good when
+  we have many, many closely related genomes and we want to figure out
+  which of them have a specific variant.
 
 * graphs are notoriously heavyweight in general, but these graphs are
   actually `quite low memory

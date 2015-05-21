@@ -44,16 +44,12 @@ def main():
         ga = ga.replace('-', '')
         tags = lh.sweep_tag_neighborhood(ga)
 
-        all_sets = []
-        for tag in tags:
-            labels = set(lh.get_tag_labels(tag))
-            all_sets.append(labels)
+        if not tags:
+            continue
 
-        if not all_sets: continue
-
-        intersect = all_sets[0]
-        for x in all_sets[1:]:
-            intersect.intersection_update(x)
+        intersect = set(lh.get_tag_labels(tags[0]))
+        for tag in tags[1:]:
+            intersect.intersection_update(lh.get_tag_labels(tag))
 
         if not intersect:                  # ignore confused reads
             continue
