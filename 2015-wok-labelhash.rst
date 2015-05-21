@@ -221,7 +221,8 @@ To run this on the same RNAseq data set as in the `counting blog post
 .. figure:: https://raw.githubusercontent.com/dib-lab/2015-khmer-wok4-multimap/master/fig1.png
    :width: 60%
 
-   Figure 2: Mapping counts via graphalign/labelhash (x axis) vs bowtie2 (y axis)
+   Figure 1: Mapping counts via graphalign/labelhash (x axis) vs
+   bowtie2 (y axis)
 
 Flaws in our current implementation
 -----------------------------------
