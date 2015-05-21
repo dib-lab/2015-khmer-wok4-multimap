@@ -36,9 +36,6 @@ def main():
         # build alignments against cg
         _, ga, ra, truncated = aligner.align(record.sequence)
 
-        if truncated:                   # ignore incomplete alignments
-            continue
-
         # now grab the tags associated with the alignment
         ga = ga.replace('-', '')
         tags = lh.sweep_tag_neighborhood(ga)
@@ -47,6 +44,8 @@ def main():
         for tag in tags:
             labels = set(lh.get_tag_labels(tag))
             all_sets.append(labels)
+
+        if not all_sets: continue
 
         intersect = all_sets[0]
         for x in all_sets[1:]:
