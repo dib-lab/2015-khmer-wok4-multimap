@@ -41,13 +41,22 @@ def main():
 
         # now grab the tags associated with the alignment
         ga = ga.replace('-', '')
-        labels = lh.sweep_label_neighborhood(ga)
+        tags = lh.sweep_tag_neighborhood(ga)
 
-        if not labels:                  # ignore unmapped reads
+        all_sets = []
+        for tag in tags:
+            labels = set(lh.get_tag_labels(tag))
+            all_sets.append(labels)
+
+        intersect = all_sets[0]
+        for x in all_sets[1:]:
+            intersect.intersection_update(x)
+
+        if not intersect:                  # ignore confused reads
             continue
 
         # retrieve the labels associated with the tags
-        matches = list(set([ names[i] for i in labels ]))
+        matches = list(set([ names[i] for i in intersect ]))
 
         hit = random.choice(matches)
         counts[hit] += 1
