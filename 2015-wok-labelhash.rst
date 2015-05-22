@@ -130,7 +130,7 @@ and then retrieve the associated labels::
 
       labels = lh.sweep_label_neighborhood(graph_path)
 
-...which you can then use with a preexisting databases of the sequence.
+...which you can then use with a preexisting database of the sequence.
 
 Why would you do any of this?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

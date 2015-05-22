@@ -7,7 +7,7 @@ https://github.com/dib-lab/2015-khmer-wok4-multimap.
 This repository contains the pipeline underlying the blog
 post/micropub entitled `Labeling a sparse covering of a De Bruijn
 graph, and utility thereof
-<http://ivory.idyll.org/blog/2015-wok-counting.html>`__.
+<http://ivory.idyll.org/blog/2015-wok-labelhash.html>`__.
 
 Contact: C. Titus Brown, titus@idyll.org, or @ctitusbrown (on Twitter).
 
